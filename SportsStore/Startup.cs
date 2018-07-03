@@ -24,9 +24,11 @@ namespace SportsStore
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration["Data:SportStoreProducts:ConnectionString"]));
-            
+
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,15 +39,62 @@ namespace SportsStore
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
-                app.UseMvc(routes => {
-                    routes.MapRoute(
-                        name: "pagination",
-                        template: "Produkty/Strona{productPage}",     //dodanie "przyjaznych" linków
-                        defaults: new {controller = "Product", action = "List"});
+                app.UseSession();
+                app.UseMvc(routes =>
+                {
+                    //trasy są stosowane w kolejności definiowania
 
+                    //przyjazne linki dla kategorii
+                    // odpowiada np. /Szachy/Strona2
                     routes.MapRoute(
-                        name: "default", 
-                        template: "{controller=Product}/{action=List}/{id?}");
+                        name: null,
+                        template: "{category}/Strona{productPage:int}",
+                        defaults: new//przyjazny link dla kolejnych stron produktów danej kategorii
+                        {
+                            controller = "Product",
+                            action = "List"
+                        }
+                    );
+                    
+                    // dodanie "przyjaznych" linków do kolejnych stron produktów
+                    // odpowiada np. /Strona2
+                    routes.MapRoute(      
+                        name: null,
+                        template: "Strona{productPage:int}",//przyjazny link dla wszystkich produktów
+                        defaults: new
+                        {
+                            controller = "Product",
+                            action = "List",
+                            productPage = 1
+                        }
+                    );
+
+                    //dodanie przyjaznych linków do strony startowej
+                    // odpowiada np. /Szachy
+                    routes.MapRoute(
+                        name: null,
+                        template: "{category}", //przyjazny link dla produktów danej kategorii kategorii
+                        defaults: new
+                        {
+                            controller = "Product",//odwołanie do kontrollera ProductController
+                            action = "List", //odwołanie do metody akcji List()
+                            productPage = 1  //przekazanie parametru strony (wyświetlanie od 1 strony)
+                        }
+                    );
+                    
+                    
+                    routes.MapRoute(
+                        name: null,
+                        template:"",
+                        defaults: new {
+                            controller = "Product",
+                            action="List",
+                            productPage = 1
+                        }
+                     );
+
+                    routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
+
                 });
                 SeedData.EnsurePopulated(app);
             }

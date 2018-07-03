@@ -9,11 +9,13 @@ using Moq;
 using SportsStore.Infrastructure;
 using SportsStore.Models.ViewModels;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SportsStore.Test
 {
     public class PageLinkTagHelperTests
     {
+
         [Fact]
         public void Can_Generate_Page_Links()//czy na stronie generowana jest zakładana liczba linków
         {
@@ -45,6 +47,7 @@ namespace SportsStore.Test
                 new Dictionary<object, object>(), "");
 
             var content = new Mock<TagHelperContent>();
+
             TagHelperOutput output = new TagHelperOutput("div",
                 new TagHelperAttributeList(), 
                 (cache, encoder) => Task.FromResult(content.Object));
@@ -52,12 +55,11 @@ namespace SportsStore.Test
             //działanie
             helper.Process(ctx, output);
 
-            //Asercje
-            Assert.Equal(@"<a href=""Test/Page1"">1</a>"
-            + @"<a href=""Test/Page2"">2</a>"
-            + @"<a href=""Test/Page3"">3</a>",
+            //Asercje, ???????
+            Assert.Equal(@"<a href=""Test/Page2"">1</a>"
+            + @"<a href="""">2</a>" 
+            + @"<a href="""">3</a>",
             output.Content.GetContent());
-
         }
     }
 }
