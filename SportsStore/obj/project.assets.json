@@ -12669,11 +12669,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore\\SportsStore\\SportsStore.csproj",
+      "projectUniqueName": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore_ASPNETCoreMVC\\SportsStore\\SportsStore.csproj",
       "projectName": "SportsStore",
-      "projectPath": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore\\SportsStore\\SportsStore.csproj",
+      "projectPath": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore_ASPNETCoreMVC\\SportsStore\\SportsStore.csproj",
       "packagesPath": "C:\\Users\\Kamil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore\\SportsStore\\obj\\",
+      "outputPath": "C:\\Users\\Kamil\\Documents\\SportsStore shop\\SportsStore_ASPNETCoreMVC\\SportsStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
