@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SportStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.5.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/Product/ListStyle.css" />
+    <link rel="stylesheet" href="~/css/Shared/_ProductSummary.css" />
+    <link rel="stylesheet" href="~/css/Cart/Index.css" />
+    <link rel="stylesheet" href="~/css/_Layout.css" />
+</head>
+<body>
+    <div class="navbar navbar-dark bg-dark navbar-size" role="navigation">
+        <a class="col navbar-brand navbar-brand-text" href="#">Sklep Sportowy</a>
+        <div class="col-4 text-right">
+            @await Component.InvokeAsync("CartSummary")
+        </div>
+    </div>
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            @await Component.InvokeAsync("NavigationMenu")
+        </div>
+        <div class="col-9">
+            @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

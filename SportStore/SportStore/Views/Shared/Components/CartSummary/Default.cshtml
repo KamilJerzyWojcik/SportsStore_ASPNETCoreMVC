@@ -1,0 +1,24 @@
+﻿@model Cart
+
+
+@if (Model.LinesCollection.Count() > 0)
+{
+    <p>
+        <small class="text-white">
+            <b>
+                Twój koszyk:
+            </b>
+            @Model.LinesCollection.Sum(x => x.Quantity) produkt(y)
+            @Model.ComputeTotalValue().ToString("c")
+        </small>
+    </p>
+}
+<p>
+    <a class="btn btn-sm btn-light"
+       asp-controller="Cart"
+       asp-action="Index"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+
+</p>

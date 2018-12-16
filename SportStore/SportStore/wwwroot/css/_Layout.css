@@ -1,0 +1,9 @@
+﻿body div.navbar-size {
+    max-height: 5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+    body div.navbar-size a.navbar-brand-text {
+        font-size: 2rem;
+    }

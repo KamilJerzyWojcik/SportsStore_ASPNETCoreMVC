@@ -1,0 +1,8 @@
+﻿table.table tbody tr td form.form-delete-product {
+    text-align: center;
+}
+
+table.table tbody tr td form.form-delete-product button.button-product-remove {
+    cursor: pointer;
+    text-align: center;
+}

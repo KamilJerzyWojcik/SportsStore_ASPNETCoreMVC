@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Wszytskie produkty";
+    Layout = "_AdminLayout";
+}
+
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+            <th class="text-right">
+                ID
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th class="text-right">
+                Cena
+            </th>
+            <th class="text-center">
+                Akcje
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Product product in Model)
+        {
+            <tr>
+                <td class="text-right">@product.ProductID</td>
+                <td>@product.Name</td>
+                <td class="text-right">@product.Price.ToString("c")</td>
+                <td class="text-center">
+                    <form asp-action="Delete" method="post">
+                        <a asp-action="Edit" asp-route-productId="@product.ProductID" class="btn btn-sm btn-warning text-white">
+                            Edytuj
+                        </a>
+                        <input type="hidden" name="productId" value="@product.ProductID" />
+                        <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Create" class="btn btn-success">
+        Dodaj produkt
+    </a>
+</div>

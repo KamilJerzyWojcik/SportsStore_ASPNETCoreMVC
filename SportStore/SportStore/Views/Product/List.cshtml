@@ -1,0 +1,15 @@
+﻿@model ProductsListViewModel
+
+@foreach (var p in Model.Products)
+{
+    @Html.Partial("_ProductSummary", p);
+}
+<div pagination="@Model.PaginationInfo"
+     page-action="List"
+     pagination-classes-enabled="true"
+     pagination-class="btn"
+     pagination-class-normal="btn-light"
+     pagination-class-selected="btn-primary"
+     page-url-category="@Model.CurrentCategory"
+     class="btn-group m-1">
+</div>

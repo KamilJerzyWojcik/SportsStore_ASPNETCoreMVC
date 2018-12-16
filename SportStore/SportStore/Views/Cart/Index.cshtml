@@ -1,0 +1,47 @@
+﻿@model CartIndexViewModel
+
+<h2>Twój koszyk</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ilość</th>
+            <th>Produkt</th>
+            <th class="text-right">Cena</th>
+            <th class="text-right">Wartość</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CartLine p in Model.Cart.LinesCollection)
+        {
+            <tr>
+                <td class="text-center">@p.Quantity</td>
+                <td class="text-center">@p.Product.Name</td>
+                <td class="text-center">@p.Product.Price</td>
+                <td class="text-center">@((p.Product.Price * p.Quantity).ToString("c"))</td>
+                <td>
+                    <form class="form-delete-product" asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                        <input type="hidden" name="ProductID" value="@p.Product.ProductID" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+                        <button type="submit" class="btn btn-sm btn-danger button-product-remove">
+                            Usuń
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="text-center">
+        <tr>
+            <td colspan="3" class="text-right">Razem:</td>
+            <td class="text-right">@Model.Cart.ComputeTotalValue()</td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">
+        Kontynuuj zakupy
+    </a>
+    <a class="btn btn-success" asp-action="Checkout" asp-controller="Order">
+        Złóż zamówienie
+    </a>
+</div>
